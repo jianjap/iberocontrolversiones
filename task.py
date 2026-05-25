@@ -42,21 +42,42 @@ def marcar_completada():
             print("Error: El número de tarea ingresado no existe.\n")
     except ValueError:
         print("Error: Por favor, ingrese un número entero válido.\n")
+
+# Se agrega la funcionalidad de eliminar tareas
+def eliminar_tarea():
+    """HU04: Eliminar Tarea"""
+    if not tareas:
+        print("No hay tareas registradas para eliminar.\n")
+        return
         
+    try:
+        indice = int(input("Ingrese el número de la tarea que desea eliminar: ")) - 1
+        if 0 <= indice < len(tareas):
+            tarea_eliminada = tareas.pop(indice)
+            print(f"Tarea '{tarea_eliminada['titulo']}' eliminada correctamente.\n")
+        else:
+            print("Error: El número de tarea ingresado no existe.\n")
+    except ValueError:
+        print("Error: Por favor, ingrese un número entero válido.\n")        
+
+# Definir menu de tareas
 def menu():
     while True:
         print("=== GESTOR DE TAREAS ===")
         print("1. Agregar Tarea (HU01)")
         print("2. Listar Tarea (HU02)")
         print("3. Marcar Tarea (HU03)")
+        print("4. Eliminar Tarea (HU04)")
         print("6. Salir")
         opcion = input("Seleccione una opción: ")
         if opcion == "1":
             agregar_tarea()
         if opcion == "2":
             listar_tareas()
-        if opcion == "2":
+        if opcion == "3":
             marcar_completada()
+        if opcion == "4":
+            eliminar_tarea()
         elif opcion == "6":
             print("Saliendo del programa...")
             break
