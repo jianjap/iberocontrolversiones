@@ -60,6 +60,40 @@ def eliminar_tarea():
     except ValueError:
         print("Error: Por favor, ingrese un número entero válido.\n")        
 
+# Se agrega la funiconalidad de filtrar tareas
+def filtrar_tarea():
+    """HU05: Filtrar por Estado"""
+    if not tareas:
+        print("No hay tareas registradas para filtrar.\n")
+        return
+        
+    print("--- OPCIONES DE FILTRADO ---")
+    print("1. Ver solo tareas Pendientes")
+    print("2. Ver solo tareas Completadas")
+    opcion_filtro = input("Seleccione una opción: ").strip()
+    
+    if opcion_filtro == "1":
+        pendientes = [t for t in tareas if not t["completada"]]
+        if not pendientes:
+            print("No existen tareas pendientes en este momento.\n")
+        else:
+            print("\n--- TAREAS PENDIENTES ---")
+            for i, tarea in enumerate(pendientes, 1):
+                print(f"{i}. [ ] {tarea['titulo']}")
+            print()
+            
+    elif opcion_filtro == "2":
+        completadas = [t for t in tareas if t["completada"]]
+        if not completadas:
+            print("No existen tareas completadas en este momento.\n")
+        else:
+            print("\n--- TAREAS COMPLETADAS ---")
+            for i, tarea in enumerate(completadas, 1):
+                print(f"{i}. [X] {tarea['titulo']}")
+            print()
+    else:
+        print("Opción de filtrado inválida.\n")
+
 # Definir menu de tareas
 def menu():
     while True:
@@ -68,6 +102,7 @@ def menu():
         print("2. Listar Tarea (HU02)")
         print("3. Marcar Tarea (HU03)")
         print("4. Eliminar Tarea (HU04)")
+        print("5. Filtrar Tarea (HU05)")
         print("6. Salir")
         opcion = input("Seleccione una opción: ")
         if opcion == "1":
@@ -78,6 +113,8 @@ def menu():
             marcar_completada()
         if opcion == "4":
             eliminar_tarea()
+        if opcion == "5":
+            filtrar_tarea()
         elif opcion == "6":
             print("Saliendo del programa...")
             break
