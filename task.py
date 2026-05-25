@@ -22,17 +22,41 @@ def listar_tareas():
 
 # Modificar el menú para incluir la opción de listar tareas:
 # Si el usuario presiona "2", invocar listar_tareas()
+
+# Se agrega la funcionalidad de marcar tareas
+def marcar_completada():
+    """HU03: Marcar Tarea como Completada"""
+    if not tareas:
+        print("No hay tareas registradas para modificar.\n")
+        return
+    
+    try:
+        indice = int(input("Ingrese el número de la tarea a marcar como completada: ")) - 1
+        if 0 <= indice < len(tareas):
+            if tareas[indice]["completada"]:
+                print(f"La tarea '{tareas[indice]['titulo']}' ya se encuentra completada.\n")
+            else:
+                tareas[indice]["completada"] = True
+                print(f"Tarea '{tareas[indice]['titulo']}' marcada como completada [X] con éxito.\n")
+        else:
+            print("Error: El número de tarea ingresado no existe.\n")
+    except ValueError:
+        print("Error: Por favor, ingrese un número entero válido.\n")
+        
 def menu():
     while True:
         print("=== GESTOR DE TAREAS ===")
         print("1. Agregar Tarea (HU01)")
-        print("2. Listar Tarea (HU01)")
+        print("2. Listar Tarea (HU02)")
+        print("3. Marcar Tarea (HU03)")
         print("6. Salir")
         opcion = input("Seleccione una opción: ")
         if opcion == "1":
             agregar_tarea()
         if opcion == "2":
             listar_tareas()
+        if opcion == "2":
+            marcar_completada()
         elif opcion == "6":
             print("Saliendo del programa...")
             break
